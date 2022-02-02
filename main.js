@@ -30,7 +30,10 @@ const deleteMovie = (event) => {
     event.target.parentNode.remove()
 
     // tells user that they deleted the movie
-    message.textContent = "Movie deleted!"
+    message.textContent = `${event.target.parentNode.firstChild.textContent} deleted!`
+
+    // call revealMessage
+    revealMessage()
 }
 
 // function that crosses off movie if selected
@@ -40,10 +43,21 @@ const crossOffMovie = (event) => {
 
     // tells user that they crossed off the movie
     if (event.target.classList.contains("checked")) {
-        message.textContent = "Movie watched!"
+        message.textContent = `${event.target.textContent} watched!`
     } else {
-        message.textContent = "Movie added back!"
+        message.textContent = `${event.target.textContent} added back!`
     }
+
+    // call revealMessage
+    revealMessage()
+}
+
+// function that will hide message after x amount of time
+const revealMessage = () => {
+    message.classList.remove("hide")
+    setTimeout(() => {
+        message.classList.add("hide")
+    }, 10000)
 }
 
 document.querySelector("form").addEventListener("submit", addMovie)
